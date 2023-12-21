@@ -98,7 +98,7 @@ impl FileFormat for ArrowFormat {
     }
 
     fn file_type(&self) -> FileType {
-        FileType::ARROW
+        FileType::Arrow
     }
 }
 

@@ -1063,7 +1063,7 @@ impl DataFrame {
         let plan = LogicalPlanBuilder::copy_to(
             self.plan,
             path.into(),
-            FileType::CSV,
+            FileType::Csv,
             options.single_file_output,
             copy_options,
         )?
@@ -1088,7 +1088,7 @@ impl DataFrame {
         let plan = LogicalPlanBuilder::copy_to(
             self.plan,
             path.into(),
-            FileType::JSON,
+            FileType::Json,
             options.single_file_output,
             copy_options,
         )?

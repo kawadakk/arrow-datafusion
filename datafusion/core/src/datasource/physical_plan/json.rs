@@ -347,7 +347,7 @@ mod tests {
             TEST_DATA_BASE,
             filename,
             1,
-            FileType::JSON,
+            FileType::Json,
             file_compression_type.to_owned(),
             work_dir,
         )
@@ -381,7 +381,7 @@ mod tests {
             TEST_DATA_BASE,
             filename,
             1,
-            FileType::JSON,
+            FileType::Json,
             file_compression_type.to_owned(),
             tmp_dir.path(),
         )
@@ -400,7 +400,7 @@ mod tests {
         let path_buf = Path::new(url.path()).join(path);
         let path = path_buf.to_str().unwrap();
 
-        let ext = FileType::JSON
+        let ext = FileType::Json
             .get_ext_with_compression(file_compression_type.to_owned())
             .unwrap();
 

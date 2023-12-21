@@ -1962,7 +1962,7 @@ mod tests {
         // Configure listing options
         let file_format = ParquetFormat::default().with_enable_pruning(Some(true));
         let listing_options = ListingOptions::new(Arc::new(file_format))
-            .with_file_extension(FileType::PARQUET.get_ext());
+            .with_file_extension(FileType::Parquet.get_ext());
 
         // execute a simple query and write the results to parquet
         let out_dir = tmp_dir.as_ref().to_str().unwrap().to_string() + "/out";

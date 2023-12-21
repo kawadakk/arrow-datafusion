@@ -190,7 +190,7 @@ impl FileFormat for JsonFormat {
     }
 
     fn file_type(&self) -> FileType {
-        FileType::JSON
+        FileType::Json
     }
 }
 

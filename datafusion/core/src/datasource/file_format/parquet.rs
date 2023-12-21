@@ -282,7 +282,7 @@ impl FileFormat for ParquetFormat {
     }
 
     fn file_type(&self) -> FileType {
-        FileType::PARQUET
+        FileType::Parquet
     }
 }
 

@@ -600,12 +600,12 @@ impl DefaultPhysicalPlanner {
                     };
 
                     let sink_format: Arc<dyn FileFormat> = match file_format {
-                        FileType::CSV => Arc::new(CsvFormat::default()),
+                        FileType::Csv => Arc::new(CsvFormat::default()),
                         #[cfg(feature = "parquet")]
-                        FileType::PARQUET => Arc::new(ParquetFormat::default()),
-                        FileType::JSON => Arc::new(JsonFormat::default()),
-                        FileType::AVRO => Arc::new(AvroFormat {} ),
-                        FileType::ARROW => Arc::new(ArrowFormat {}),
+                        FileType::Parquet => Arc::new(ParquetFormat::default()),
+                        FileType::Json => Arc::new(JsonFormat::default()),
+                        FileType::Avro => Arc::new(AvroFormat {} ),
+                        FileType::Arrow => Arc::new(ArrowFormat {}),
                     };
 
                     sink_format.create_writer_physical_plan(input_exec, session_state, config, None).await

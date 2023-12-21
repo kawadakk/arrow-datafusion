@@ -52,7 +52,7 @@ impl DataFrame {
         let plan = LogicalPlanBuilder::copy_to(
             self.plan,
             path.into(),
-            FileType::PARQUET,
+            FileType::Parquet,
             options.single_file_output,
             copy_options,
         )?

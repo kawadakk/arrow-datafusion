@@ -65,7 +65,7 @@ pub struct CsvReadOptions<'a> {
     /// Max number of rows to read from CSV files for schema inference if needed. Defaults to `DEFAULT_SCHEMA_INFER_MAX_RECORD`.
     pub schema_infer_max_records: usize,
     /// File extension; only files with this extension are selected for data input.
-    /// Defaults to `FileType::CSV.get_ext().as_str()`.
+    /// Defaults to `FileType::Csv.get_ext().as_str()`.
     pub file_extension: &'a str,
     /// Partition Columns
     pub table_partition_cols: Vec<(String, DataType)>,
@@ -264,7 +264,7 @@ pub struct ArrowReadOptions<'a> {
     pub schema: Option<&'a Schema>,
 
     /// File extension; only files with this extension are selected for data input.
-    /// Defaults to `FileType::ARROW.get_ext().as_str()`.
+    /// Defaults to `FileType::Arrow.get_ext().as_str()`.
     pub file_extension: &'a str,
 
     /// Partition Columns
@@ -310,7 +310,7 @@ pub struct AvroReadOptions<'a> {
     pub schema: Option<&'a Schema>,
 
     /// File extension; only files with this extension are selected for data input.
-    /// Defaults to `FileType::AVRO.get_ext().as_str()`.
+    /// Defaults to `FileType::Avro.get_ext().as_str()`.
     pub file_extension: &'a str,
     /// Partition Columns
     pub table_partition_cols: Vec<(String, DataType)>,
@@ -356,7 +356,7 @@ pub struct NdJsonReadOptions<'a> {
     /// Max number of rows to read from JSON files for schema inference if needed. Defaults to `DEFAULT_SCHEMA_INFER_MAX_RECORD`.
     pub schema_infer_max_records: usize,
     /// File extension; only files with this extension are selected for data input.
-    /// Defaults to `FileType::JSON.get_ext().as_str()`.
+    /// Defaults to `FileType::Json.get_ext().as_str()`.
     pub file_extension: &'a str,
     /// Partition Columns
     pub table_partition_cols: Vec<(String, DataType)>,

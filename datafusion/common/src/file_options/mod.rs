@@ -169,19 +169,19 @@ impl FileTypeWriterOptions {
 
         let file_type_write_options = match file_type {
             #[cfg(feature = "parquet")]
-            FileType::PARQUET => {
+            FileType::Parquet => {
                 FileTypeWriterOptions::Parquet(ParquetWriterOptions::try_from(options)?)
             }
-            FileType::CSV => {
+            FileType::Csv => {
                 FileTypeWriterOptions::CSV(CsvWriterOptions::try_from(options)?)
             }
-            FileType::JSON => {
+            FileType::Json => {
                 FileTypeWriterOptions::JSON(JsonWriterOptions::try_from(options)?)
             }
-            FileType::AVRO => {
+            FileType::Avro => {
                 FileTypeWriterOptions::Avro(AvroWriterOptions::try_from(options)?)
             }
-            FileType::ARROW => {
+            FileType::Arrow => {
                 FileTypeWriterOptions::Arrow(ArrowWriterOptions::try_from(options)?)
             }
         };
@@ -199,19 +199,19 @@ impl FileTypeWriterOptions {
 
         let file_type_write_options = match file_type {
             #[cfg(feature = "parquet")]
-            FileType::PARQUET => {
+            FileType::Parquet => {
                 FileTypeWriterOptions::Parquet(ParquetWriterOptions::try_from(options)?)
             }
-            FileType::CSV => {
+            FileType::Csv => {
                 FileTypeWriterOptions::CSV(CsvWriterOptions::try_from(options)?)
             }
-            FileType::JSON => {
+            FileType::Json => {
                 FileTypeWriterOptions::JSON(JsonWriterOptions::try_from(options)?)
             }
-            FileType::AVRO => {
+            FileType::Avro => {
                 FileTypeWriterOptions::Avro(AvroWriterOptions::try_from(options)?)
             }
-            FileType::ARROW => {
+            FileType::Arrow => {
                 FileTypeWriterOptions::Arrow(ArrowWriterOptions::try_from(options)?)
             }
         };

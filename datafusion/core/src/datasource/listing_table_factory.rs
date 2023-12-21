@@ -67,7 +67,7 @@ impl TableProviderFactory for ListingTableFactory {
         let file_extension = get_extension(cmd.location.as_str());
 
         let file_format: Arc<dyn FileFormat> = match file_type {
-            FileType::CSV => {
+            FileType::Csv => {
                 let mut statement_options = StatementOptions::from(&cmd.options);
                 let mut csv_format = CsvFormat::default()
                     .with_has_header(cmd.has_header)
@@ -82,12 +82,12 @@ impl TableProviderFactory for ListingTableFactory {
                 Arc::new(csv_format)
             }
             #[cfg(feature = "parquet")]
-            FileType::PARQUET => Arc::new(ParquetFormat::default()),
-            FileType::AVRO => Arc::new(AvroFormat),
-            FileType::JSON => Arc::new(
+            FileType::Parquet => Arc::new(ParquetFormat::default()),
+            FileType::Avro => Arc::new(AvroFormat),
+            FileType::Json => Arc::new(
                 JsonFormat::default().with_file_compression_type(file_compression_type),
             ),
-            FileType::ARROW => Arc::new(ArrowFormat),
+            FileType::Arrow => Arc::new(ArrowFormat),
         };
 
         let (provided_schema, table_partition_cols) = if cmd.schema.fields().is_empty() {
@@ -161,7 +161,7 @@ impl TableProviderFactory for ListingTableFactory {
         // Some options have special syntax which takes precedence
         // e.g. "WITH HEADER ROW" overrides (header false, ...)
         let file_type_writer_options = match file_type {
-            FileType::CSV => {
+            FileType::Csv => {
                 let mut csv_writer_options =
                     file_type_writer_options.try_into_csv()?.clone();
                 csv_writer_options.writer_options = csv_writer_options
@@ -175,16 +175,16 @@ impl TableProviderFactory for ListingTableFactory {
                 csv_writer_options.compression = cmd.file_compression_type;
                 FileTypeWriterOptions::CSV(csv_writer_options)
             }
-            FileType::JSON => {
+            FileType::Json => {
                 let mut json_writer_options =
                     file_type_writer_options.try_into_json()?.clone();
                 json_writer_options.compression = cmd.file_compression_type;
                 FileTypeWriterOptions::JSON(json_writer_options)
             }
             #[cfg(feature = "parquet")]
-            FileType::PARQUET => file_type_writer_options,
-            FileType::ARROW => file_type_writer_options,
-            FileType::AVRO => file_type_writer_options,
+            FileType::Parquet => file_type_writer_options,
+            FileType::Arrow => file_type_writer_options,
+            FileType::Avro => file_type_writer_options,
         };
 
         let table_path = ListingTableUrl::parse(&cmd.location)?;

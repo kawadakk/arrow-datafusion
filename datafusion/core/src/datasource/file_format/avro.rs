@@ -91,7 +91,7 @@ impl FileFormat for AvroFormat {
     }
 
     fn file_type(&self) -> FileType {
-        FileType::AVRO
+        FileType::Avro
     }
 }
 

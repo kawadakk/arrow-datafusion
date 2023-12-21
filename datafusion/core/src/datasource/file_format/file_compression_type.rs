@@ -236,15 +236,15 @@ impl FileTypeExt for FileType {
         let ext = self.get_ext();
 
         match self {
-            FileType::JSON | FileType::CSV => Ok(format!("{}{}", ext, c.get_ext())),
-            FileType::AVRO | FileType::ARROW => match c.variant {
+            FileType::Json | FileType::Csv => Ok(format!("{}{}", ext, c.get_ext())),
+            FileType::Avro | FileType::Arrow => match c.variant {
                 UNCOMPRESSED => Ok(ext),
                 _ => Err(DataFusionError::Internal(
                     "FileCompressionType can be specified for CSV/JSON FileType.".into(),
                 )),
             },
             #[cfg(feature = "parquet")]
-            FileType::PARQUET => match c.variant {
+            FileType::Parquet => match c.variant {
                 UNCOMPRESSED => Ok(ext),
                 _ => Err(DataFusionError::Internal(
                     "FileCompressionType can be specified for CSV/JSON FileType.".into(),
@@ -266,16 +266,16 @@ mod tests {
     #[test]
     fn get_ext_with_compression() {
         for (file_type, compression, extension) in [
-            (FileType::CSV, FileCompressionType::UNCOMPRESSED, ".csv"),
-            (FileType::CSV, FileCompressionType::GZIP, ".csv.gz"),
-            (FileType::CSV, FileCompressionType::XZ, ".csv.xz"),
-            (FileType::CSV, FileCompressionType::BZIP2, ".csv.bz2"),
-            (FileType::CSV, FileCompressionType::ZSTD, ".csv.zst"),
-            (FileType::JSON, FileCompressionType::UNCOMPRESSED, ".json"),
-            (FileType::JSON, FileCompressionType::GZIP, ".json.gz"),
-            (FileType::JSON, FileCompressionType::XZ, ".json.xz"),
-            (FileType::JSON, FileCompressionType::BZIP2, ".json.bz2"),
-            (FileType::JSON, FileCompressionType::ZSTD, ".json.zst"),
+            (FileType::Csv, FileCompressionType::UNCOMPRESSED, ".csv"),
+            (FileType::Csv, FileCompressionType::GZIP, ".csv.gz"),
+            (FileType::Csv, FileCompressionType::XZ, ".csv.xz"),
+            (FileType::Csv, FileCompressionType::BZIP2, ".csv.bz2"),
+            (FileType::Csv, FileCompressionType::ZSTD, ".csv.zst"),
+            (FileType::Json, FileCompressionType::UNCOMPRESSED, ".json"),
+            (FileType::Json, FileCompressionType::GZIP, ".json.gz"),
+            (FileType::Json, FileCompressionType::XZ, ".json.xz"),
+            (FileType::Json, FileCompressionType::BZIP2, ".json.bz2"),
+            (FileType::Json, FileCompressionType::ZSTD, ".json.zst"),
         ] {
             assert_eq!(
                 file_type.get_ext_with_compression(compression).unwrap(),
@@ -284,9 +284,9 @@ mod tests {
         }
 
         let mut ty_ext_tuple = vec![];
-        ty_ext_tuple.push((FileType::AVRO, ".avro"));
+        ty_ext_tuple.push((FileType::Avro, ".avro"));
         #[cfg(feature = "parquet")]
-        ty_ext_tuple.push((FileType::PARQUET, ".parquet"));
+        ty_ext_tuple.push((FileType::Parquet, ".parquet"));
 
         // Cannot specify compression for these file types
         for (file_type, extension) in ty_ext_tuple {

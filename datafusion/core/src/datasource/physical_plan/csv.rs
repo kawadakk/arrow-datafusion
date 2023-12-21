@@ -609,7 +609,7 @@ mod tests {
             path.as_str(),
             filename,
             1,
-            FileType::CSV,
+            FileType::Csv,
             file_compression_type.to_owned(),
             tmp_dir.path(),
         )?;
@@ -675,7 +675,7 @@ mod tests {
             path.as_str(),
             filename,
             1,
-            FileType::CSV,
+            FileType::Csv,
             file_compression_type.to_owned(),
             tmp_dir.path(),
         )?;
@@ -741,7 +741,7 @@ mod tests {
             path.as_str(),
             filename,
             1,
-            FileType::CSV,
+            FileType::Csv,
             file_compression_type.to_owned(),
             tmp_dir.path(),
         )?;
@@ -805,7 +805,7 @@ mod tests {
             path.as_str(),
             filename,
             1,
-            FileType::CSV,
+            FileType::Csv,
             file_compression_type.to_owned(),
             tmp_dir.path(),
         )?;
@@ -859,7 +859,7 @@ mod tests {
             path.as_str(),
             filename,
             1,
-            FileType::CSV,
+            FileType::Csv,
             file_compression_type.to_owned(),
             tmp_dir.path(),
         )?;
@@ -964,7 +964,7 @@ mod tests {
             path.as_str(),
             filename,
             1,
-            FileType::CSV,
+            FileType::Csv,
             file_compression_type.to_owned(),
             tmp_dir.path(),
         )

@@ -286,7 +286,7 @@ impl FileFormat for CsvFormat {
     }
 
     fn file_type(&self) -> FileType {
-        FileType::CSV
+        FileType::Csv
     }
 }
 
@@ -1045,7 +1045,7 @@ mod tests {
         let ctx = SessionContext::new_with_config(config);
         let file_format = CsvFormat::default().with_has_header(false);
         let listing_options = ListingOptions::new(Arc::new(file_format))
-            .with_file_extension(FileType::CSV.get_ext());
+            .with_file_extension(FileType::Csv.get_ext());
         ctx.register_listing_table(
             "empty",
             "tests/data/empty_files/all_empty/",
@@ -1098,7 +1098,7 @@ mod tests {
         let ctx = SessionContext::new_with_config(config);
         let file_format = CsvFormat::default().with_has_header(false);
         let listing_options = ListingOptions::new(Arc::new(file_format))
-            .with_file_extension(FileType::CSV.get_ext());
+            .with_file_extension(FileType::Csv.get_ext());
         ctx.register_listing_table(
             "empty",
             "tests/data/empty_files/some_empty",

@@ -85,7 +85,7 @@ pub fn scan_partitioned_csv(partitions: usize, work_dir: &Path) -> Result<Arc<Cs
         path.as_str(),
         filename,
         partitions,
-        FileType::CSV,
+        FileType::Csv,
         FileCompressionType::UNCOMPRESSED,
         work_dir,
     )?;
@@ -164,7 +164,7 @@ pub fn partitioned_file_groups(
     for (i, line) in f.lines().enumerate() {
         let line = line.unwrap();
 
-        if i == 0 && file_type == FileType::CSV {
+        if i == 0 && file_type == FileType::Csv {
             // write header to all partitions
             for w in writers.iter_mut() {
                 w.write_all(line.as_bytes()).unwrap();

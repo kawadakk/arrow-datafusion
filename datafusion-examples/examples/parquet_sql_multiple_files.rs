@@ -34,7 +34,7 @@ async fn main() -> Result<()> {
     // Configure listing options
     let file_format = ParquetFormat::default().with_enable_pruning(Some(true));
     let listing_options = ListingOptions::new(Arc::new(file_format))
-        .with_file_extension(FileType::PARQUET.get_ext());
+        .with_file_extension(FileType::Parquet.get_ext());
 
     // Register a listing table - this will use all files in the directory as data sources
     // for the query

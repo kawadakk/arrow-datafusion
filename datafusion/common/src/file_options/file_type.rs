@@ -44,27 +44,27 @@ pub trait GetExt {
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum FileType {
     /// Apache Arrow file
-    ARROW,
+    Arrow,
     /// Apache Avro file
-    AVRO,
+    Avro,
     /// Apache Parquet file
     #[cfg(feature = "parquet")]
-    PARQUET,
+    Parquet,
     /// CSV file
-    CSV,
+    Csv,
     /// JSON file
-    JSON,
+    Json,
 }
 
 impl GetExt for FileType {
     fn get_ext(&self) -> String {
         match self {
-            FileType::ARROW => DEFAULT_ARROW_EXTENSION.to_owned(),
-            FileType::AVRO => DEFAULT_AVRO_EXTENSION.to_owned(),
+            FileType::Arrow => DEFAULT_ARROW_EXTENSION.to_owned(),
+            FileType::Avro => DEFAULT_AVRO_EXTENSION.to_owned(),
             #[cfg(feature = "parquet")]
-            FileType::PARQUET => DEFAULT_PARQUET_EXTENSION.to_owned(),
-            FileType::CSV => DEFAULT_CSV_EXTENSION.to_owned(),
-            FileType::JSON => DEFAULT_JSON_EXTENSION.to_owned(),
+            FileType::Parquet => DEFAULT_PARQUET_EXTENSION.to_owned(),
+            FileType::Csv => DEFAULT_CSV_EXTENSION.to_owned(),
+            FileType::Json => DEFAULT_JSON_EXTENSION.to_owned(),
         }
     }
 }
@@ -72,12 +72,12 @@ impl GetExt for FileType {
 impl Display for FileType {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let out = match self {
-            FileType::CSV => "csv",
-            FileType::JSON => "json",
+            FileType::Csv => "csv",
+            FileType::Json => "json",
             #[cfg(feature = "parquet")]
-            FileType::PARQUET => "parquet",
-            FileType::AVRO => "avro",
-            FileType::ARROW => "arrow",
+            FileType::Parquet => "parquet",
+            FileType::Avro => "avro",
+            FileType::Arrow => "arrow",
         };
         write!(f, "{}", out)
     }
@@ -89,12 +89,12 @@ impl FromStr for FileType {
     fn from_str(s: &str) -> Result<Self> {
         let s = s.to_uppercase();
         match s.as_str() {
-            "ARROW" => Ok(FileType::ARROW),
-            "AVRO" => Ok(FileType::AVRO),
+            "ARROW" => Ok(FileType::Arrow),
+            "AVRO" => Ok(FileType::Avro),
             #[cfg(feature = "parquet")]
-            "PARQUET" => Ok(FileType::PARQUET),
-            "CSV" => Ok(FileType::CSV),
-            "JSON" | "NDJSON" => Ok(FileType::JSON),
+            "PARQUET" => Ok(FileType::Parquet),
+            "CSV" => Ok(FileType::Csv),
+            "JSON" | "NDJSON" => Ok(FileType::Json),
             _ => Err(DataFusionError::NotImplemented(format!(
                 "Unknown FileType: {s}"
             ))),
@@ -112,14 +112,14 @@ mod tests {
     #[test]
     fn from_str() {
         for (ext, file_type) in [
-            ("csv", FileType::CSV),
-            ("CSV", FileType::CSV),
-            ("json", FileType::JSON),
-            ("JSON", FileType::JSON),
-            ("avro", FileType::AVRO),
-            ("AVRO", FileType::AVRO),
-            ("parquet", FileType::PARQUET),
-            ("PARQUET", FileType::PARQUET),
+            ("csv", FileType::Csv),
+            ("CSV", FileType::Csv),
+            ("json", FileType::Json),
+            ("JSON", FileType::Json),
+            ("avro", FileType::Avro),
+            ("AVRO", FileType::Avro),
+            ("parquet", FileType::Parquet),
+            ("PARQUET", FileType::Parquet),
         ] {
             assert_eq!(FileType::from_str(ext).unwrap(), file_type);
         }

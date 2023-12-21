@@ -140,16 +140,16 @@ impl ListingTableConfig {
             .map_err(|_| DataFusionError::Internal(err_msg))?;
 
         let file_format: Arc<dyn FileFormat> = match file_type {
-            FileType::ARROW => Arc::new(ArrowFormat),
-            FileType::AVRO => Arc::new(AvroFormat),
-            FileType::CSV => Arc::new(
+            FileType::Arrow => Arc::new(ArrowFormat),
+            FileType::Avro => Arc::new(AvroFormat),
+            FileType::Csv => Arc::new(
                 CsvFormat::default().with_file_compression_type(file_compression_type),
             ),
-            FileType::JSON => Arc::new(
+            FileType::Json => Arc::new(
                 JsonFormat::default().with_file_compression_type(file_compression_type),
             ),
             #[cfg(feature = "parquet")]
-            FileType::PARQUET => Arc::new(ParquetFormat::default()),
+            FileType::Parquet => Arc::new(ParquetFormat::default()),
         };
 
         Ok((file_format, ext))
@@ -1112,7 +1112,7 @@ mod tests {
         register_test_store(&ctx, &[(&path, 100)]);
 
         let opt = ListingOptions::new(Arc::new(AvroFormat {}))
-            .with_file_extension(FileType::AVRO.get_ext())
+            .with_file_extension(FileType::Avro.get_ext())
             .with_table_partition_cols(vec![(String::from("p1"), DataType::Utf8)])
             .with_target_partitions(4);
 
@@ -1375,7 +1375,7 @@ mod tests {
             "10".into(),
         );
         helper_test_append_new_files_to_table(
-            FileType::JSON,
+            FileType::Json,
             FileCompressionType::UNCOMPRESSED,
             Some(config_map),
             2,
@@ -1393,7 +1393,7 @@ mod tests {
             "10".into(),
         );
         helper_test_append_new_files_to_table(
-            FileType::CSV,
+            FileType::Csv,
             FileCompressionType::UNCOMPRESSED,
             Some(config_map),
             2,
@@ -1411,7 +1411,7 @@ mod tests {
             "10".into(),
         );
         helper_test_append_new_files_to_table(
-            FileType::PARQUET,
+            FileType::Parquet,
             FileCompressionType::UNCOMPRESSED,
             Some(config_map),
             2,
@@ -1429,7 +1429,7 @@ mod tests {
             "20".into(),
         );
         helper_test_append_new_files_to_table(
-            FileType::PARQUET,
+            FileType::Parquet,
             FileCompressionType::UNCOMPRESSED,
             Some(config_map),
             1,
@@ -1615,7 +1615,7 @@ mod tests {
         );
         config_map.insert("datafusion.execution.batch_size".into(), "1".into());
         helper_test_append_new_files_to_table(
-            FileType::PARQUET,
+            FileType::Parquet,
             FileCompressionType::UNCOMPRESSED,
             Some(config_map),
             2,
@@ -1633,7 +1633,7 @@ mod tests {
             "zstd".into(),
         );
         let e = helper_test_append_new_files_to_table(
-            FileType::PARQUET,
+            FileType::Parquet,
             FileCompressionType::UNCOMPRESSED,
             Some(config_map),
             2,
@@ -1684,7 +1684,7 @@ mod tests {
         // Register appropriate table depending on file_type we want to test
         let tmp_dir = TempDir::new()?;
         match file_type {
-            FileType::CSV => {
+            FileType::Csv => {
                 session_ctx
                     .register_csv(
                         "t",
@@ -1695,7 +1695,7 @@ mod tests {
                     )
                     .await?;
             }
-            FileType::JSON => {
+            FileType::Json => {
                 session_ctx
                     .register_json(
                         "t",
@@ -1706,7 +1706,7 @@ mod tests {
                     )
                     .await?;
             }
-            FileType::PARQUET => {
+            FileType::Parquet => {
                 session_ctx
                     .register_parquet(
                         "t",
@@ -1715,7 +1715,7 @@ mod tests {
                     )
                     .await?;
             }
-            FileType::AVRO => {
+            FileType::Avro => {
                 session_ctx
                     .register_avro(
                         "t",
@@ -1724,7 +1724,7 @@ mod tests {
                     )
                     .await?;
             }
-            FileType::ARROW => {
+            FileType::Arrow => {
                 session_ctx
                     .register_arrow(
                         "t",
